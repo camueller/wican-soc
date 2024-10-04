@@ -1,4 +1,15 @@
+# Das Fahrzeug-Hersteller-spezifische und möglicherwise auch Modell-spezifische Set an CAN-Befehlen.
+# The vehicle manufacturer-specific and possibly also model-specific set of CAN commands.
 PROFILE="nissan"
+
+# Die IP-Adresse oder der Hostname des MQTT-Servers, der auch vom WiCAN verwendet wird.
+# The IP address or hostname of the MQTT server, which is also used by the WiCAN.
 MQTT_SERVER="192.168.1.1"
+
+# Das MQTT-Topic, unter dem der SOC veröffentlicht werden soll.
+# The MQTT topic under which the SOC should be published.
 MQTT_SOC_TOPIC="car/soc"
+
+# Die Geräte-ID des WiCAN-ODB2-Adapters
+# The device ID of the WiCAN ODB2 adapter
 WICAN_DEVICE_ID="12345678901d"
