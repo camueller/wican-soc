@@ -1,9 +1,10 @@
-
 #!/bin/bash
-while read -r f ; do source "$f" ;  done < <(find ./profile -type f)
-. ./config
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-PROFILES=`ls -p ./profile | grep -v / | sed 's/\.sh//g' | tr '\n' ' '`
+while read -r f ; do source "$f" ;  done < <(find $SCRIPT_DIR/profile -type f)
+. $SCRIPT_DIR/config
+
+PROFILES=`ls -p $SCRIPT_DIR/profile | grep -v / | sed 's/\.sh//g' | tr '\n' ' '`
 CAN_MESSAGE_FILE=/tmp/can-message.txt
 MQTT_SUB="mosquitto_sub -h $MQTT_SERVER -t wican/$WICAN_DEVICE_ID/can/rx"
 MQTT_PUB="mosquitto_pub -h $MQTT_SERVER -t $MQTT_SOC_TOPIC"

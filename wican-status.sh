@@ -1,11 +1,14 @@
 #!/bin/bash
-while read -r f ; do source "$f" ;  done < <(find ./profile -type f)
-. ./config
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+while read -r f ; do source "$f" ;  done < <(find $SCRIPT_DIR/profile -type f)
+. $SCRIPT_DIR/config
 
 MQTT_SUB="mosquitto_sub -h $MQTT_SERVER -t wican/$WICAN_DEVICE_ID/status -C 1"
 MQTT_PUB="mosquitto_pub -h $MQTT_SERVER -t wican/$WICAN_DEVICE_ID/can/tx"
 CAN_STATUS_FILE=/tmp/can-status.txt
-PROFILES=`ls -p ./profile | grep -v / | sed 's/\.sh//g' | tr '\n' ' '`
+PROFILES=`ls -p $SCRIPT_DIR/profile | grep -v / | sed 's/\.sh//g' | tr '\n' ' '`
 
 if [[ $PROFILES =~ (^| )$PROFILE($| ) ]]; then
     echo "Using profile $PROFILE for WiCAN device $WICAN_DEVICE_ID"
