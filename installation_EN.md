@@ -1,57 +1,57 @@
 # Installation
-## Benötigte Bibliotheken
-### mosquitto-clients
-Für die Kommunikation mit dem WiCAN ODB2-Adapter wird der MQTT-Client "Mosquitto" verwendet. Das Paket `mosquitto-clients` läßt sich über den Paket-Manager installieren.
+## Required libraries
+### mosquitto clients
+The MQTT client “Mosquitto” is used to communicate with the WiCAN ODB2 adapter. The package `mosquitto-clients` can be installed via the package manager.
 
 ### jq
-Der WiCAN ODB2-Adapter verpackt die CAN-Nachrichten für den Transport über MQTT in das JSON-Format. Zum Verarbeiten dieser Nachrichten wird das Programm `jq` benötigt, das sich über das gleichnamige Paket mittels Paket-Manager installieren lässt.
+The WiCAN ODB2 adapter packages the CAN messages into JSON format for transport over MQTT. To process these messages, the program `jq` is required, which can be installed using the package of the same name using the package manager.
 
 ### bc
-Die Berechnung des SoC aus den Inhalten der CAN-Nachrichten geht über die mathematischen Fähigkeiten der Bash-Shell hinaus. Deshalb wird das Programm `bc` benötigt, um komplexere Berechnungen durchführen zu können. Dieses lässt sich über das gleichnamige Paket mittels Paket-Manager installieren.
+Calculating the SoC from the contents of the CAN messages goes beyond the mathematical capabilities of the Bash shell. Therefore the program `bc` is needed to carry out more complex calculations. This can be installed using the package of the same name using the package manager.
 
-## Repository clonen
-Zunächst muss das Repository in ein belilebiges Verzeichnis geclont werden:
+## Clone repository
+First, the repository must be cloned into any directory:
 ```bash
 git clone https://github.com/camueller/wican-soc.git
 ```
-Das darin beim Clonen entstandene Verzeichnis `wican-soc` wird nachfolgend als WICAN_SOC_HOME bezeichnet.
+The `wican-soc` directory created herin during cloning is referred to as WICAN_SOC_HOME.
 
-## Konfiguration anpassen
-Im Verzeichnis WICAN_SOC_HOME befindet sich die [config](https://github.com/camueller/wican-soc/blob/main/config)-Datei. Diese enhält die konfigurierbaren Parameter und deren Beschreibung. Die Werte der Parameter müssen entsprechend angepasst werden.
+## Adjust configuration
+The WICAN_SOC_HOME directory contains the [config](https://github.com/camueller/wican-soc/blob/main/config) file. This contains the configurable parameters and their description. The values of the parameters must be adjusted accordingly.
 
 ## Systemd
-Zum Starten der beiden Scripts werden Systemd-Services verwendet. In deren Konfigurationsdateien müssen die Pfade zu den Shell-Scripts gesetzt werden:
+Systemd services are used to start the two scripts. The paths to the shell scripts must be set in their configuration files:
 
-In der Datei `WICAN_SOC_HOME/systemd/wican-status.service` muss die Zeile mit `ExecStart` angepasst werden, wobei der Pfad dem WICAN_SOC_HOME entsprechen muss.
+In the file `WICAN_SOC_HOME/systemd/wican-status.service` the line with `ExecStart` must be adjusted, whereby the path must correspond to the WICAN_SOC_HOME.
 ```
 ExecStart=/opt/sae/soc/wican-soc/wican-status.sh
 ```
 
-Analog muss in der Datei `WICAN_SOC_HOME/systemd/wican-soc.service` die Zeile mit `ExecStart` angepasst werden, wobei der Pfad dem WICAN_SOC_HOME entsprechen muss.
+Similarly, in the file `WICAN_SOC_HOME/systemd/wican-soc.service` the line with `ExecStart` must be adjusted, whereby the path must correspond to WICAN_SOC_HOME.
 ```
 ExecStart=/opt/sae/soc/wican-soc/wican-soc.sh
 ```
 
-Aus dem systemd-Verzeichnis müssen diese Dateien verlinkt werden, wobei WICAN_SOC_HOME durch den tatsächlichen Pfad ersetzt werden muss:
+From the systemd directory, these files must be linked, replacing WICAN_SOC_HOME with the actual path:
 ```bash
 $ cd /lib/systemd/system
 $ sudo ln -s WICAN_SOC_HOME/systemd/wican-status.service
 $ sudo ln -s WICAN_SOC_HOME/systemd/wican-soc.service
 ```
 
-Jetzt muss der systemd dazu verlasst werden, die Konfiguration erneut zu lesen:
+Now the systemd must be left to read the configuration again:
 ```bash
-$ sudo systemctl daemon-reload
+$ sudo systemctl daemon reload
 ```
 
-Die nachfolgende Befehle sind nur für `wican-status` beschrieben. Für `wican-soc` gelten sie analog.
+The following commands are only described for `wican-status`. They apply analogously to `wican-soc`.
 
-Zum Start genügt:
+To start, all you need is:
 ```bash
-$ sudo service wican-status start
+$ sudo service wican status start
 ```
 
-Der Status inkl. verwendetem Profils und WiCAN-Geräte-ID lässt sich wie folgt anzeigen:
+The status including the profile used and WiCAN device ID can be displayed as follows:
 ```bash
 $ sudo service wican-status status
 ● wican-status.service - WiCan status monitor
@@ -69,12 +69,12 @@ Oct 04 16:32:28 raspi2 wican-status.sh[9564]: Using profile nissan for WiCAN dev
 Oct 04 16:32:28 raspi2 wican-status.sh[9564]: Waiting for message ...
 ```
 
-Zum Beenden genügt:
+To stop, just type:
 ```bash
 $ sudo service wican-status stop
 ```
 
-Damit die Services auch nach einem Reboot gestartet werden, müssen sie entsprechend aktiviert werden:
+In order for the services to be started even after a reboot, they must be activated accordingly:
 ```bash
 $ sudo systemctl enable wican-soc
 Created symlink /etc/systemd/system/multi-user.target.wants/wican-soc.service → /etc/systemd/system/wican-soc.service.
@@ -82,7 +82,7 @@ $ sudo systemctl enable wican-status
 Created symlink /etc/systemd/system/multi-user.target.wants/wican-status.service → /etc/systemd/system/wican-status.service.
 ```
 
-Die Konsole-Ausgaben der Scripts sind durch den Befehl `journalctl` verfügbar:
+The console output of the scripts is available through the `journalctl` command:
 ```bash
 sudo journalctl _SYSTEMD_UNIT=wican-soc.service
 Oct 04 12:55:28 raspi2 wican-soc.sh[8429]: Using profile nissan for WiCAN device 12345678901d

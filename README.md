@@ -1,3 +1,5 @@
+<a href="https://github.com/camueller/wican-soc/blob/master/README_EN.md"><img align="left" src="pics/english.jpeg">&nbsp;&nbsp;</a>[This documentation is available in English](README_EN.md).
+
 # WiCAN SoC
 
 Mit WiCAN SoC kann der **SoC (State of Charge) eines Fahrzeugs via MQTT verfügbar gemacht werden** für Smart Home Steuerungen oder Wallboxen. Dazu wird ein [WiCAN ODB2 Adapter von MeatPi](https://www.meatpi.com/products/wican) benötigt, welcher **permanent im Fahrzeug eingesteckt** bleibt.
@@ -21,7 +23,7 @@ Für die Unterstützung weiterer Fahrzeug-Hersteller / Modelle bin ich auf die *
 Weil ich die so ermittelten Angaben zur CAN-Bus-Kommunikation nicht selbst testen kann, möchte ich sie hier auch nicht einfach blind übernehmen. Ich bin aber gern behilflich bei der [Erstellung neuer Profile](new_profile.md) für `wican-soc`.
 
 ## Technische Details
-`wican-soc` besteht aus mehreren Scripts, die auf einem **24x7-Linux-System** laufen. Hinsichtlich der Performance gibt es keine hohen Anforderungen, d.h. ein Raspberry Pi oder ein NAS sollten völlig ausreichen.
+`wican-soc` besteht aus mehreren Shell-Scripts, die auf einem **24x7-Linux-System** laufen. Hinsichtlich der Performance gibt es keine hohen Anforderungen, d.h. ein Raspberry Pi oder ein NAS sollten völlig ausreichen.
 
 ### [Installation](installation.md)
 
