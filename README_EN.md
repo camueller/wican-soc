@@ -1,5 +1,3 @@
-<a href="https://github.com/camueller/wican-soc/blob/master/README_EN.md"><img align="left" src="pics/english.jpeg">&nbsp;&nbsp;</a>[This documentation is available in English](README_EN.md).
-
 # WiCAN SoC
 
 With WiCAN SoC, the **SoC (State of Charge) of a vehicle can be provided via MQTT** for smart home controls or wallboxes. This requires a [WiCAN ODB2 adapter from MeatPi](https://www.meatpi.com/products/wican), which remains **permanently plugged in** into the vehicle.
