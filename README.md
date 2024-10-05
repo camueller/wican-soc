@@ -1,4 +1,4 @@
-<a href="https://github.com/camueller/wican-soc/blob/master/README_EN.md"><img align="left" src="pics/english.jpeg">&nbsp;&nbsp;</a>[This documentation is available in English](README_EN.md).
+<a href="https://github.com/camueller/wican-soc/blob/master/README_EN.md"><img align="left" src="pics/english.jpeg">&nbsp;&nbsp;</a>[This documentation is available in English](README_EN.md).<br><br><br>
 
 # WiCAN SoC
 
