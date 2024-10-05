@@ -2,6 +2,8 @@
 
 Die Profile befinden sich im Verzeichnis `profile`. Für jedes Profil muss darin eine Datei mit dem Profilnamen und der Erweiterung `.sh` existieren.
 
+Die Erstellung neuer Profile sollte von dem Profil `template.sh` ausgehen, das auch einige Hinweise enthält.
+
 Jedes Profil muss die folgenden Functions bereitstellen:
 
 ## `<profilname>_send_soc_request` (Beipiel: `nissan_send_soc_request`)
