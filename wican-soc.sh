@@ -1,4 +1,14 @@
 #!/bin/bash
+check_binary() {
+    if ! command -v $1 2>&1 >/dev/null
+    then
+        echo "$1 could not be found. Please refer to https://github.com/camueller/wican-soc to fix it."
+        exit 1
+    fi
+}
+check_binary jq
+check_binary bc
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 while read -r f ; do source "$f" ;  done < <(find $SCRIPT_DIR/profile -type f)

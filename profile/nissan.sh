@@ -18,7 +18,7 @@ nissan_send_soc_request() {
 }
 
 nissan_response_message_count() {
-  return 8;
+  return 8
 }
 
 nissan_parse_soc_response() {

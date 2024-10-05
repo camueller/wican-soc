@@ -1,4 +1,14 @@
 # Installation
+## Benötigte Bibliotheken
+### mosquitto-clients
+Für die Kommunikation mit dem WiCAN ODB2-Adapter wird der MQTT-Client "Mosquitto" verwendet. Das Paket `mosquitto-clients` läßt sich über den Paket-Manager installieren.
+
+### jq
+Der WiCAN ODB2-Adapter verpackt die CAN-Nachrichten für den Transport über MQTT in das JSON-Format. Zum Verarbeiten dieser Nachrichten wird das Programm `jq` benötigt, das sich über das gleichnamige Paket mittels Paket-Manager installieren lässt.
+
+### bc
+Die Berechnung des SoC aus den Inhalten der CAN-Nachrichten geht über die mathematischen Fähigkeiten der Bash-Shell hinaus. Deshalb wird das Programm `bc` benötigt, um komplexere Berechnungen durchführen zu können. Dieses lässt sich über das gleichnamige Paket mittels Paket-Manager installieren.
+
 ## Repository clonen
 Zunächst muss das Repository in ein belilebiges Verzeichnis geclont werden:
 ```bash
